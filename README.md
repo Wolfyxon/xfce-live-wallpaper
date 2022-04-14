@@ -1,0 +1,1 @@
+# Live wallpaper for Linux XFCE
