@@ -27,7 +27,7 @@ __IMPORTANT NOTE:__ Paths must be global, example: `/home/username/Pictures/file
 ```
 python main.py -gif /home/username/Pictures/mygif.gif
 ```
-- Video
+- Video (Warning: splitted video into images may take high amount of disk space)
 ```
 python main.py -video /home/username/Videos/myvideo.mp4
 ```
