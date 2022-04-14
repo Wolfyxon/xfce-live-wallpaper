@@ -16,17 +16,14 @@ __Make sure you have these programs installed:__
 # Usage
 __IMPORTANT NOTE:__ Paths must be global, example: `/home/username/Pictures/file` not `./file` <br>
 `python main.py <type> <path> <frame update wait time (optional, default 0.05)>`
-<br>
 GIF:
 ```
 python main.py -gif /home/username/Pictures/mygif.gif
 ```
-<br>
 Video
 ```
 python main.py -video /home/username/Videos/myvideo.mp4
 ```
-<br>
 Image sequence (slideshow)
 ```
 python main.py -sequence /home/username/Pictures/wallpapers/
