@@ -50,8 +50,6 @@ def main():
         types = ["-video", "-gif", "-sequence","-cache"]
         type = sys.argv[1]
 
-
-
         if(len(sys.argv)>3): wait_time = float(sys.argv[3])
 
         #Doesn't require path

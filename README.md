@@ -7,6 +7,13 @@ __Make sure you have these programs installed:__
 - ffmpeg
 - imagemagick
 
+#### Note
+I highly recommend to use `performance` CPU governor or the desktop may lag.
+You can change the governor by using:
+```
+sudo cpupower frequency-set -g performance
+```
+
 ## Demonstation
 <p>
 <img src="https://github.com/Wolfyxon/xfce-live-wallpaper/blob/main/github/demos/demo2.gif?raw=true">
@@ -20,7 +27,7 @@ __IMPORTANT NOTE:__ Paths must be global, example: `/home/username/Pictures/file
 ```
 python main.py -gif /home/username/Pictures/mygif.gif
 ```
-- Video
+- Video (Warning: splitted video into images may take high amount of disk space)
 ```
 python main.py -video /home/username/Videos/myvideo.mp4
 ```

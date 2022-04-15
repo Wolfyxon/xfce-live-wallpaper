@@ -5,7 +5,6 @@ import subprocess
 import shutil
 
 
-
 def setWallpaper(path):
     print("Setting wallpaper to "+path)
 
