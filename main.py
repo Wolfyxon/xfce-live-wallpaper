@@ -20,42 +20,76 @@ def welcomePrint():
     print("")
     print(formatting["BOLD"]+"Live wallpaper script for Linux XFCE")
     print(formatting["FAIL"]+"by Wolfyxon")
-    print(formatting["ENDC"]+"usage: main.py <type (gif/video/sequence)> <path/to/file (directory if sequence)> <wait time (optional, default is 0.05s)>")
+    print(formatting["ENDC"]+"usage: main.py <type> <path/to/file (directory if sequence)> <wait time (optional, default is 0.05s)>")
+    print("""Available types:
+    - gif : Converts GIF file into frames then runs animation. (Best quality)
+    - video : Converts video file into frames then runs animation. (Worst quality)
+    - cache : Uses last cached animation
+    """)
     print(formatting["WARNING"]+"IMPORTANT NOTE: path must be global, Example: /home/you/Videos/video.mp4 NOT: ./video.mp4. Make sure you have imagemagik installed")
     print(formatting["ENDC"])
 
+def clearCache():
+    print("Clearing cache...")
+    shutil.rmtree('./cache', ignore_errors=True)
+    os.mkdir("./cache")
 
-if len(sys.argv) > 1:
-    types = ["-video", "-gif", "-sequence"]
-    type = sys.argv[1]
-    path = None
-    wait_time = 0.05
-    if(len(sys.argv)>2): path = sys.argv[2]
-    else: print(formatting["FAIL"]+"No path specified")
-    if(len(sys.argv)>3): wait_time = float(sys.argv[3])
+def runFromCache():
+    os.system("python " + os.path.abspath("./wallpaper.py") + " " + os.path.abspath("./cache") + " " + str(wait_time))
 
-    if type in types:
+wait_time = 0.05
+path = None
+type = None
+
+def main():
+    global type
+    global wait_time
+    global path
+
+    if len(sys.argv) > 1:
+        types = ["-video", "-gif", "-sequence","-cache"]
+        type = sys.argv[1]
+
+
+
+        if(len(sys.argv)>3): wait_time = float(sys.argv[3])
+
+        #Doesn't require path
+        if type in types:
+            if type == "-cache":
+                print("Using last cached animation")
+                runFromCache()
+                return
+
+        #Require path
+        if(len(sys.argv)>2): path = sys.argv[2]
+        else: print(formatting["FAIL"]+"No path specified")
         if(os.path.exists(path)):
-            print("Clearing cache and preparing for conversion please wait...")
-            shutil.rmtree('./cache', ignore_errors=True)
-            os.mkdir("./cache")
+            print("Killing other wallpaper instances...")
+            os.system("nohup " + os.path.abspath("./kill.sh") + " &")
             print("Done")
             if type == "-sequence":
                 print("Animating image sequence in "+path)
                 os.system("python wallpaper.py "+path+" "+str(wait_time))
             if type == "-gif":
+                clearCache()
                 print("Converting GIF to image sequence, please wait...")
-                os.system("convert "+path+" -coalesce cache/frame.bmp")
-                os.system("python "+os.path.abspath("./wallpaper.py")+" "+os.path.abspath("./cache")+" "+str(wait_time))
+                os.system("convert "+path+" -coalesce cache/frame.png")
+                runFromCache()
             if type == "-video":
+                clearCache()
                 print("Converting video file to image sequence, please wait...")
-                os.system("ffmpeg -i "+path+" -vf fps=30 cache/frame-%d.bmp")
-                os.system("python " + os.path.abspath("./wallpaper.py") + " " + os.path.abspath("./cache") + " " + str(wait_time))
-        else:
-            print(formatting["FAIL"] + "This path does not exist")
+                os.system("ffmpeg -i "+path+" -vf fps=30 -vf scale=1280:720 cache/frame-%d.png")
+                runFromCache()
 
-    else: print(formatting["FAIL"]+"Unknown type")
+            else:
+                print(formatting["FAIL"] + "This path does not exist")
 
-else:
-    print(formatting["FAIL"]+"No arguments specified")
-    welcomePrint()
+        else: print(formatting["FAIL"]+"Unknown type, use -typename. Example: -gif")
+
+    else:
+        print(formatting["FAIL"]+"No arguments specified")
+        welcomePrint()
+
+main()
+print("\nExiting")
