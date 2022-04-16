@@ -25,6 +25,7 @@ Preview quality may not be accurate with actual wallpaper quality.
 <img src="https://github.com/Wolfyxon/xfce-live-wallpaper/blob/main/github/demos/demo2.gif?raw=true">
 <img src="https://github.com/Wolfyxon/xfce-live-wallpaper/blob/main/github/demos/demo1.gif?raw=true">
 </p>
+See also https://youtu.be/RJ0nsBiiqEY
 
 # Usage
 __IMPORTANT NOTE:__ Paths must be global, example: `/home/username/Pictures/file` not `./file` <br>
