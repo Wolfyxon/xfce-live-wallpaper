@@ -11,6 +11,7 @@ def setWallpaper(path):
     if os.path.exists(path):
         commands = [
             #XFCE
+            "xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitorDP-0/workspace0/last-image -s "+path,
             "xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitoreDP-1/workspace0/last-image -s "+path,
             "xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/last-image -s "+path,
             "xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/last-single-image -s "+path,
