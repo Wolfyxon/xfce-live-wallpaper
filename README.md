@@ -73,5 +73,6 @@ while True:
         time.sleep(wait_time)
 ```
 (See also `setWallpaper(path)` inside code.)
-# Made by Wolfyxon
-Enjoy :)
+# Alternatives
+XFCE's wallpaper updating is very slow and leads to major lag when not waiting.
+Best way to make animated wallpaper is by not using any DE that renders something on desktop (like Qtile, i3). Wallpaper on these can be updated with `feh` which is way faster. Someone already made a script for that https://github.com/thomas10-10/foo-Wallpaper-Feh-Gif 
