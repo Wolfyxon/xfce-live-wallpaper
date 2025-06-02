@@ -1,4 +1,5 @@
 venv/
 cache/
 .idea/
+.vscode/
 nohup.out
